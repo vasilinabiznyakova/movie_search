@@ -12,7 +12,7 @@ const MovieDetails = () => {
   const [error, setError] = useState(null);
   const { movieId } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
+  const backTo = location.state?.from ?? '/';
 
   useEffect(() => {
     getFilmById(movieId)
@@ -40,7 +40,7 @@ const MovieDetails = () => {
       {status === 'rejected' && <ErrorView message={error.message} />}
       {status === 'resolved' && (
         <div>
-          <Link to={backLinkHref}>Go back</Link>
+          <Link to={backTo}>Go back</Link>
           <Poster
             src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
             width="189"
@@ -59,10 +59,14 @@ const MovieDetails = () => {
           </p>
           <ul>
             <ListItem>
-              <Link to="cast">Cast</Link>
+              <Link to="cast" state={{ from: backTo }}>
+                Cast
+              </Link>
             </ListItem>
             <ListItem>
-              <Link to="reviews">Reviews</Link>
+              <Link to="reviews" state={{ from: backTo }}>
+                Reviews
+              </Link>
             </ListItem>
           </ul>
         </div>

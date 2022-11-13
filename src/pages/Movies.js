@@ -33,7 +33,7 @@ const Movies = () => {
     e.preventDefault();
     const form = e.currentTarget;
     setSearchParams({ query: form.elements.query.value });
-    form.reset();
+    // form.reset();
   };
 
   console.log(searchedFilm);
